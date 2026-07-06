@@ -26,6 +26,20 @@ def lint(policy):
             findings.append(_f("device-orphan-zone", "error",
                 f'device "{d.id}" is in undeclared zone "{d.zone}"'))
 
+    # devices need unique IPs (a shared IP defeats per-address segmentation) and unique ids
+    seen_ips = {}
+    seen_ids = set()
+    for d in policy.devices:
+        if d.ip in seen_ips:
+            findings.append(_f("duplicate-device-ip", "error",
+                f'devices "{seen_ips[d.ip]}" and "{d.id}" share IP {d.ip} — '
+                f'segmentation rules cannot tell them apart'))
+        else:
+            seen_ips[d.ip] = d.id
+        if d.id in seen_ids:
+            findings.append(_f("duplicate-device-id", "warn", f'duplicate device id "{d.id}"'))
+        seen_ids.add(d.id)
+
     # the core zero-trust invariant
     for fl in policy.flows:
         for z in (fl.src_zone, fl.dst_zone):

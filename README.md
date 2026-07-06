@@ -20,6 +20,7 @@
 | Policy model: zones with trust tiers, devices, sanctioned flows | ✅ works |
 | Zero-trust linter: flags any lower-trust → higher-trust flow (the pivot risk) | ✅ works |
 | Linter: orphan devices, unknown zones, unknown trust tiers | ✅ works |
+| Linter: duplicate device IPs (breaks segmentation) and duplicate device ids | ✅ works |
 | `generate` default-deny nftables ruleset with explicit allows | ✅ works |
 | **Fails closed** — refuses to emit rules from an invalid policy; never auto-applies | ✅ works |
 | YAML inventories, IPv6, per-device (not per-zone) rules | ⚠️ not built — [roadmap](#roadmap) |

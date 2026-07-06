@@ -42,6 +42,18 @@ class PolicyTests(unittest.TestCase):
         findings = lint(Policy.from_dict(data))
         self.assertTrue(any(f["rule"] == "device-orphan-zone" for f in findings))
 
+    def test_duplicate_device_ip_is_error(self):
+        data = dict(BASE)
+        data["devices"] = BASE["devices"] + [{"id": "clone", "ip": "10.0.9.11", "zone": "iot"}]
+        findings = lint(Policy.from_dict(data))
+        self.assertTrue(any(f["rule"] == "duplicate-device-ip" and f["severity"] == "error" for f in findings))
+
+    def test_duplicate_device_id_warns(self):
+        data = dict(BASE)
+        data["devices"] = BASE["devices"] + [{"id": "register-1", "ip": "10.0.1.6", "zone": "pos"}]
+        findings = lint(Policy.from_dict(data))
+        self.assertTrue(any(f["rule"] == "duplicate-device-id" and f["severity"] == "warn" for f in findings))
+
 
 if __name__ == "__main__":
     unittest.main()
