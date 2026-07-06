@@ -11,6 +11,13 @@
 
 ---
 
+## Quick start
+
+```bash
+git clone https://github.com/technika11y/kitchen-microsegmenter && cd kitchen-microsegmenter
+PYTHONPATH=src python3 -m microseg.cli lint examples/kitchen.json
+```
+
 ## Status — read this first
 
 **Pre-alpha (`v0.1.0a0`). Honest state of the code:**
