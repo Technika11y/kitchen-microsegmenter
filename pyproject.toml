@@ -1,0 +1,18 @@
+[project]
+name = "technika11y-kitchen-microsegmenter"
+version = "0.1.0a0"
+description = "Zero-trust micro-segmentation rules for commercial-kitchen IoT — so a compromised sensor can't pivot to the POS."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["zero-trust", "nftables", "iot", "segmentation", "pos", "food-service", "security"]
+
+[project.scripts]
+kitchen-microsegmenter = "microseg.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["microseg"]

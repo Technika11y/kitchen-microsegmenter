@@ -1,0 +1,22 @@
+{
+  "zones": {
+    "iot": "iot",
+    "boh": "boh",
+    "pos": "pos"
+  },
+  "devices": [
+    { "id": "temp-probe-walkin", "ip": "10.0.9.11", "zone": "iot" },
+    { "id": "temp-probe-line",   "ip": "10.0.9.12", "zone": "iot" },
+    { "id": "kds-display-1",     "ip": "10.0.5.20", "zone": "boh" },
+    { "id": "register-1",        "ip": "10.0.1.5",  "zone": "pos" }
+  ],
+  "flows": [
+    {
+      "src_zone": "boh",
+      "dst_zone": "iot",
+      "port": 1883,
+      "proto": "tcp",
+      "note": "KDS reads temp telemetry over MQTT (higher trust -> lower, allowed)"
+    }
+  ]
+}
